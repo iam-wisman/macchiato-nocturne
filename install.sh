@@ -73,19 +73,19 @@ check_icons() {
 }
 
 main() {
-  local repo src
+  local repo
   repo=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
   command -v omarchy >/dev/null || { echo "Omarchy not found; this theme is for Omarchy." >&2; exit 1; }
 
   # Work from a copy: the clone may be $DEST itself (after `omarchy theme
   # install`), which install_theme replaces.
-  src=$(mktemp -d)
-  trap 'rm -rf "$src"' EXIT
-  tar -C "$repo" --exclude=.git -cf - . | tar -C "$src" -xf -
+  SRC=$(mktemp -d)
+  trap 'rm -rf "$SRC"' EXIT
+  tar -C "$repo" --exclude=.git -cf - . | tar -C "$SRC" -xf -
 
-  install_theme "$src"
-  install_extras_hook "$src"
+  install_theme "$SRC"
+  install_extras_hook "$SRC"
   enable_kitty_blink
   check_icons
 

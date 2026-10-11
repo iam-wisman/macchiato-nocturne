@@ -16,6 +16,7 @@ tuned for a darker, night-time Catppuccin Macchiato desk.
   Surface1 `#494d64` so they recede instead of competing with the focused window
 - **Shadow:** uses Crust `#181926` from the palette instead of an off-palette navy
 - **Keyboard backlight:** mauve `#c6a0f6` to match the accent (was blue)
+- **Kitty cursor:** mauve `#c6a0f6` cursor and cursor trail, smooth ease-in-out blink
 - **Starship:** `username` uses `style_user` (fixes the "Unknown key" warning)
 - **Wallpapers:** 12 extra dark, palette-friendly wallpapers from Wallhaven (`nocturne-*`)
 

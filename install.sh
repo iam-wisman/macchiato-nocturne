@@ -29,9 +29,8 @@ say() { printf '\e[35m::\e[0m %s\n' "$*"; }
 install_theme() {
   local src=$1 stage
 
-  # Stage first: the source may be $DEST itself (after `omarchy theme install`).
   stage=$(mktemp -d)
-  tar -C "$src" --exclude=.git --exclude=install.sh --exclude=extras --exclude=README.md -cf - . | tar -C "$stage" -xf -
+  tar -C "$src" --exclude=install.sh --exclude=extras --exclude=README.md -cf - . | tar -C "$stage" -xf -
 
   mkdir -p "$THEMES_DIR"
   rm -rf "$DEST"
@@ -74,10 +73,16 @@ check_icons() {
 }
 
 main() {
-  local src
-  src=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+  local repo src
+  repo=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
   command -v omarchy >/dev/null || { echo "Omarchy not found; this theme is for Omarchy." >&2; exit 1; }
+
+  # Work from a copy: the clone may be $DEST itself (after `omarchy theme
+  # install`), which install_theme replaces.
+  src=$(mktemp -d)
+  trap 'rm -rf "$src"' EXIT
+  tar -C "$repo" --exclude=.git -cf - . | tar -C "$src" -xf -
 
   install_theme "$src"
   install_extras_hook "$src"

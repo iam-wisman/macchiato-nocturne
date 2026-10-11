@@ -1,5 +1,11 @@
 # Macchiato Nocturne
 
+Install:
+
+```bash
+omarchy theme install https://github.com/iam-wisman/macchiato-nocturne
+```
+
 A personal fork of [Omarchy Macchiato Core](https://github.com/hembramnishant50-glitch/omarchy-macchiato-core-theme),
 tuned for a darker, night-time Catppuccin Macchiato desk.
 

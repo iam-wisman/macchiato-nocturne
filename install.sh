@@ -12,7 +12,8 @@
 #   ./macchiato-nocturne/install.sh
 #
 # Safe to run again: it replaces the installed theme and skips anything that is
-# already in place. Every file it changes outside the theme is backed up first.
+# already in place. Files it changes outside the theme are backed up first:
+# kitty.conf next to itself, the hook under ~/.local/state/macchiato-nocturne/backups.
 
 set -euo pipefail
 
@@ -23,6 +24,8 @@ HOOK_DIR="$HOME/.config/omarchy/hooks/theme-set.d"
 KITTY_CONF="$HOME/.config/kitty/kitty.conf"
 DEFAULT_BG=nocturne-01-jevz8y.png
 STAMP=$(date +%s)
+# Kept out of the hooks dir: Omarchy runs every file there not named *.sample.
+BACKUP_DIR="$HOME/.local/state/macchiato-nocturne/backups/$STAMP"
 
 say() { printf '\e[35m::\e[0m %s\n' "$*"; }
 
@@ -48,7 +51,10 @@ install_extras_hook() {
     say "Theme extras hook already installed"
     return
   fi
-  [[ -f $dest ]] && cp "$dest" "$dest.bak.$STAMP"
+  if [[ -f $dest ]]; then
+    mkdir -p "$BACKUP_DIR"
+    cp "$dest" "$BACKUP_DIR/theme-extras.sh"
+  fi
   mkdir -p "$HOOK_DIR"
   install -m 755 "$src" "$dest"
   say "Installed theme extras hook (starship, tmux, fastfetch)"

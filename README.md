@@ -1,13 +1,28 @@
 # Macchiato Nocturne
 
-Install:
-
-```bash
-omarchy theme install https://github.com/iam-wisman/macchiato-nocturne
-```
-
 A personal fork of [Omarchy Macchiato Core](https://github.com/hembramnishant50-glitch/omarchy-macchiato-core-theme),
 tuned for a darker, night-time Catppuccin Macchiato desk.
+
+## Install
+
+```bash
+git clone https://github.com/iam-wisman/macchiato-nocturne
+./macchiato-nocturne/install.sh
+```
+
+Use the script rather than `omarchy theme install`. Omarchy treats a theme that
+still has its `.git` folder as third-party and skips its Hyprland, terminal,
+Neovim and gum configs every time it is applied, so the gradient border,
+animations and Kitty cursor trail would be lost. `install.sh`:
+
+- installs the theme as a plain folder so Omarchy applies every file
+- adds a `theme-set` hook that applies the theme's `starship.toml`, `tmux.conf`
+  and `fastfetch.jsonc` (Omarchy doesn't do this by itself)
+- turns on the Kitty cursor blink that Omarchy's default `kitty.conf` disables
+- applies the theme and sets the default wallpaper
+
+It is safe to re-run, and backs up any file it changes outside the theme. The
+clone can be deleted afterwards.
 
 ## Changes from Macchiato Core
 
@@ -16,7 +31,9 @@ tuned for a darker, night-time Catppuccin Macchiato desk.
   Surface1 `#494d64` so they recede instead of competing with the focused window
 - **Shadow:** uses Crust `#181926` from the palette instead of an off-palette navy
 - **Keyboard backlight:** mauve `#c6a0f6` to match the accent (was blue)
-- **Kitty cursor:** mauve `#c6a0f6` cursor and cursor trail, smooth ease-in-out blink
+- **Terminal cursor:** mauve `#c6a0f6` in Kitty, Alacritty, Ghostty and Foot; Kitty also gets a
+  mauve cursor trail and a smooth ease-in-out blink
+- **Ghostty:** background now matches the other terminals (Mantle `#1e2030`, was Base `#24273a`)
 - **Starship:** `username` uses `style_user` (fixes the "Unknown key" warning)
 - **Wallpapers:** 12 extra dark, palette-friendly wallpapers from Wallhaven (`nocturne-*`)
 

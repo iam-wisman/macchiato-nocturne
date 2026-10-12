@@ -34,6 +34,8 @@ clone can be deleted afterwards.
 - **Terminal cursor:** mauve `#c6a0f6` in Kitty, Alacritty, Ghostty and Foot; Kitty also gets a
   mauve cursor trail and a smooth ease-in-out blink
 - **Ghostty:** background now matches the other terminals (Mantle `#1e2030`, was Base `#24273a`)
+- **Copy on select:** selecting text in Kitty, Alacritty or Ghostty copies it to the clipboard
+  (Foot has no option for this; it only fills the primary selection)
 - **Starship:** `username` uses `style_user` (fixes the "Unknown key" warning)
 - **Wallpapers:** 12 extra dark, palette-friendly wallpapers from Wallhaven (`nocturne-*`)
 
